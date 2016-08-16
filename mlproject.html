@@ -206,6 +206,7 @@ testdata &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span cl
 ### load the required packages
 
 <span class="kw">library</span>(<span class="st">&quot;caret&quot;</span>)     ## for the algorithm and most of the works of this project
+## Warning: package 'caret' was built under R version 3.3.1
 <span class="kw">library</span>(<span class="st">&quot;printr&quot;</span>)   ## displays nicely formattted tables</code></pre></div>
 </div>
 <div id="exploratory-and-cleaning-data" class="section level2">
@@ -261,19 +262,19 @@ cor &lt;-<span class="st"> </span><span class="kw">abs</span>(<span class="kw">c
 <table>
 <thead>
 <tr class="header">
-<th align="left"></th>
+<th></th>
 <th align="right">row</th>
 <th align="right">col</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">accel_belt_z</td>
+<td>accel_belt_z</td>
 <td align="right">11</td>
 <td align="right">2</td>
 </tr>
 <tr class="even">
-<td align="left">roll_belt</td>
+<td>roll_belt</td>
 <td align="right">2</td>
 <td align="right">11</td>
 </tr>
@@ -305,7 +306,7 @@ pred2 &lt;-<span class="st"> </span><span class="kw">predict</span>(modelfit2, <
 <table>
 <thead>
 <tr class="header">
-<th align="left"></th>
+<th></th>
 <th align="right">Accuracy</th>
 <th align="right">Kappa</th>
 <th align="right">AccuracyLower</th>
@@ -314,21 +315,21 @@ pred2 &lt;-<span class="st"> </span><span class="kw">predict</span>(modelfit2, <
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">model1</td>
+<td>model1</td>
 <td align="right">0.9943944</td>
 <td align="right">0.9929091</td>
 <td align="right">0.9921366</td>
 <td align="right">0.9961383</td>
 </tr>
 <tr class="even">
-<td align="left">model2</td>
+<td>model2</td>
 <td align="right">0.9838627</td>
 <td align="right">0.9795880</td>
 <td align="right">0.9803086</td>
 <td align="right">0.9869249</td>
 </tr>
 <tr class="odd">
-<td align="left">modelagree</td>
+<td>modelagree</td>
 <td align="right">0.9842025</td>
 <td align="right">0.9800154</td>
 <td align="right">0.9806815</td>
@@ -343,7 +344,7 @@ pred2 &lt;-<span class="st"> </span><span class="kw">predict</span>(modelfit2, <
 <table>
 <thead>
 <tr class="header">
-<th align="left"></th>
+<th></th>
 <th align="right">Accuracy</th>
 <th align="right">Kappa</th>
 <th align="right">AccuracyLower</th>
@@ -352,21 +353,21 @@ pred2 &lt;-<span class="st"> </span><span class="kw">predict</span>(modelfit2, <
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">model1</td>
+<td>model1</td>
 <td align="right">0.9945624</td>
 <td align="right">0.9931213</td>
 <td align="right">0.9923324</td>
 <td align="right">0.9962778</td>
 </tr>
 <tr class="even">
-<td align="left">model2</td>
+<td>model2</td>
 <td align="right">0.9809686</td>
 <td align="right">0.9759219</td>
 <td align="right">0.9771447</td>
 <td align="right">0.9843044</td>
 </tr>
 <tr class="odd">
-<td align="left">modelagree</td>
+<td>modelagree</td>
 <td align="right">0.9833475</td>
 <td align="right">0.9789280</td>
 <td align="right">0.9797430</td>
@@ -381,19 +382,19 @@ pred2 &lt;-<span class="st"> </span><span class="kw">predict</span>(modelfit2, <
 <table>
 <thead>
 <tr class="header">
-<th align="left"></th>
+<th></th>
 <th align="right">model1</th>
 <th align="right">model2</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">in-sample error</td>
+<td>in-sample error</td>
 <td align="right">0.0000000</td>
 <td align="right">0.0066242</td>
 </tr>
 <tr class="even">
-<td align="left">out of sample error</td>
+<td>out of sample error</td>
 <td align="right">0.0054376</td>
 <td align="right">0.0190314</td>
 </tr>

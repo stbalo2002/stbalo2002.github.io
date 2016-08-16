@@ -14,7 +14,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, verbose = FALSE, collapse = TRUE, error = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = TRUE, verbose = FALSE, collapse = TRUE, error = FALSE, message = FALSE, warning = FALSE)
 ```
 
 # Introduction
@@ -161,7 +161,7 @@ model1 <- confusionMatrix(predtest1, test$classe)[[3]][1:4]  ## checks for the a
 model2 <- confusionMatrix(predtest2, test$classe)[[3]][1:4] ## checks the accurary of the second model in predicting the test subset
 modelagree <- confusionMatrix(predtest1, predtest2)[[3]][1:4]  ## checks the agreement of both models
 p1 <- rbind(model1, model2, modelagree)
-p1
+kable(p1)
 ```
 
 ##  Validating the algorithm
@@ -174,7 +174,7 @@ model1 <- confusionMatrix(predvalid1, valid$classe)[[3]][1:4]  ## displays the a
 model2 <- confusionMatrix(predvalid2, valid$classe)[[3]][1:4]  ## displays the accuracy of model2
 modelagree <- confusionMatrix(predvalid1, predvalid2)[[3]][1:4] ## checks the agreement of both models
 p2 <- rbind(model1, model2, modelagree)  ## displays the accuracy of model1, model 2 and the agreement between the two models for the "valid" data
-p2  ##  displays the data
+kable(p2)  ##  displays the data
 ```
 
 
@@ -194,7 +194,8 @@ model1 <- (1 - confusionMatrix(predvalid1, valid$classe)[[3]][[1]])
 model2 <- (1 - confusionMatrix(predvalid2, valid$classe)[[3]][[1]])
 b <- data.frame(model1, model2)
 rownames(b) <- ("out of sample error")
-rbind(a, b)
+o3 <- rbind(a, b)
+kable(p3)
 ```
 
 ## Predicting the test dataset
