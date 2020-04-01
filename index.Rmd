@@ -162,8 +162,8 @@ article a:active {
     HIV Epidemic: Gains and Challenges (PART I)
   </a></li>
   
-  <li><a href="hiv_epidemic1.html">
-    HIV Epidemic: Gains and Challenges (PART I)
+  <li><a href="hiv_epidemic2.html">
+    HIV Epidemic: Gains and Challenges (PART II)
   </a></li>
 </div>
 </div>
