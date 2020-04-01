@@ -1,0 +1,242 @@
+---
+title: "MDG and Child Mortality in Nigeria"
+date: "May 1, 2017"
+output: 
+  html_document: 
+    fig_height: 2.5
+    fig_width: 4
+    include:
+      in_header: _icon.html
+    toc: yes
+    toc_float: yes
+---
+
+<style>
+
+back-to-top {
+    position: fixed;
+    bottom: 5em;
+    right: -25px;
+    text-decoration: none;
+    color: #000000;
+    background-color: #f5f5f5;
+    background-image: url(../../img/top.png);
+    background-repeat: no-repeat;
+    font-size: 12px;
+    padding: 2.3em;
+    display: none;
+}
+
+
+#TOC {
+margin-top: 150px;
+}
+
+.no-show {
+margin-top: 10%;
+display: none;
+}
+
+small {
+color: #999;
+}
+
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      message = FALSE, 
+                      warning = FALSE,
+                      fig.height = 6,
+                      fig.align = "center",
+                      out.width = "90%")
+source("./scripts/im_script2.R")
+```
+
+
+## Introduction
+
+**Child mortality** is *"the death of a person under the age of five years"*. A child's death is particularly painful and hard, emotionally and physically, on the parents. Given the circumstances, many of these deaths go unreported (especially in low and middle-income countries). There are many forms/sub-divisions of child mortality:^[as used in the context here] 
+  
+  - **Neonatal mortality**: death of a child within the first 28 days of life.
+  
+  - **post-neonatal mortality**: death of a child between 29 days of life and before his/her first year birthday.
+  
+  - **Infant mortality**: death of any child less than 1 year old (i.e. Neonatal mortality plus post-neonatal mortality).
+  
+  - **Under-five mortality**: death of any child before his/her fifth year birthday.
+  
+Child mortality is measured in **rates** (number of deaths per 1000 live births). [Most causes of child mortality are preventable](https://www.who.int/pmnch/media/press_materials/fs/fs_mdg_4childmortality/en/), reduction of the 1990 child mortality rates by two thirds was the focus of MDG-4. This goal was nearly achieved with a 53% decline in under-five mortality rate (U5MR) by 2015. However, regional and country decline are widespread. The current sustainable Development Goal (SDG-3) aims to *prevent all forms of preventable child deaths with a **target of U5MR of 25 or fewer deaths per 1000 livebirths by 2030** for all countries*.
+
+We utilized the World Bank [World Development Indicator](http://data.worldbank.org/data-catalog/world-development-indicators) and the United Nations' [World Population Prospects 2015](https://esa.un.org/unpd/wpp/) data for the analysis presented here focusing on neonatal, infant and under-five mortality rates.
+
+## Global Picture
+
+There has been a steady decline in child mortality since 1990. At the beginning of the Millenium Development Goals, Pakistan had the highest Neonatal Mortality Rate (NMR) while Sierra Leone has the highest Infant Mortality Rate (IMR) and Under-five Mortality Rate (U5MR). Nigeria exists somewhere within the top 10 of the three indices (<small>figs 1-3</small>).
+
+### Neonatal Mortality Rates {.tabset .tabset-fade .tabset-pills}
+
+#### 1990
+
+```{r "nmr 1990", fig.cap="fig. 1: countries with the highest NMR in 1990"}
+ggplotly(nm_plot)
+```
+
+#### 2000
+
+```{r "nmr 2000", fig.cap="fig. 2: countries with the highest NMR pre-MDG"}
+ggplotly(nm_plot2)
+```
+
+#### 2015
+
+```{r "nmr 2015", fig.cap="fig. 3: countries with the highest NMR after MDG"}
+ggplotly(nm_plot3)
+```
+
+
+### Infant Mortality Rates {.tabset .tabset-fade .tabset-pills}
+
+#### 1990
+
+```{r "imr 1990", fig.cap="fig. 4: countries with the highest IMR in 1990"}
+ggplotly(im_plot)
+```
+
+#### 2000
+
+```{r "imr 2000", fig.cap="fig. 5: countries with the highest IMR in 2000"}
+ggplotly(im_plot2)
+```
+
+#### 2015
+
+```{r "imr 2015", fig.cap="fig. 6: countries with the highest IMR in 2015"}
+ggplotly(im_plot3)
+```
+
+
+### Under-five Mortality Rates {.tabset .tabset-fade .tabset-pills}
+
+MDG significantly reduced under-five mortality rate. However, despite the decline, African countries have consistently had the highest U5MR in the world with Afghanistan being the only non-African country in the top 20 in the year 2015.
+
+#### 1990
+
+```{r "u5mr 1990", fig.cap="fig. 7: countries with the highest U5MR in 1990"}
+ggplotly(u5m_plot)
+```
+
+#### 2000
+
+```{r "u5mr 2000", fig.cap="fig. 8: countries with the highest U5MR in 2000"}
+ggplotly(u5m_plot2)
+```
+
+#### 2015
+
+```{r "u5mr 2015", fig.cap="fig. 9: countries with the highest U5MR in 2015"}
+ggplotly(u5m_plot3)
+```
+
+### Global Statistics
+
+The NMR reduced from `r signif(summary_nmr[[1, 2]], 4)` in 1990 to `r signif(summary_nmr[[26, 2]], 4)` in 2015. The global Infant Mortality Rate also dropped  from `r signif(summary_imr[[1, 2]], 4)` in 1990 to `r signif(summary_imr[[26, 2]], 4)` in 2015 while the U5MR decreased from `r signif(summary_u5mr[[1, 2]], 4)` to `r signif(summary_u5mr[[26, 2]], 4)` within the same period. However, the mortality rates have steadily been declining before the onset of the MDGs (<small>fig x</small>). The decline in IMR and U5MR became more drastic with the MDGs.
+
+```{r "global_stat", fig.cap = "fig 10: global trends in child mortalities"}
+gg <- ggplot(child_mortalities, aes(x = year, y = value, color = `child mortality`)) + 
+  geom_point() + 
+  geom_line() + 
+  geom_vline(xintercept = 2000, color = "blue") +
+  theme_minimal() + 
+  labs(title = "Global trend in child mortalities from 1990 to 2015",
+       y = "mortality rates ('000)") + 
+  scale_y_continuous(breaks = seq(0, 80, by = 10)) +
+  scale_x_continuous(breaks = seq(1990, 2016, by = 2))
+
+ggplotly(gg)
+```
+
+
+The number of under-five deaths reduced from **`r annual_u5death_decline[[1, 2]]` million** in 1990 to **`r annual_u5death_decline[[3, 2]]` million** just before the MDG years and further to **`r annual_u5death_decline[[6, 2]]` million** in the year 2015. MDG-4 significantly contributed to the decline in child mortalities as shown in table 1.
+
+```{r "table of global stat"}
+knitr::kable(global_stat, caption = "table 1: effect of MDG on child mortalities")
+```
+
+## Nigeria
+
+MDG-4 significantly reduced child mortalities (NMR, IMR and U5MR) in Nigeria (<small>table 2</small>). The U5MR declined from an average of `r nig_u5m[[26, 5]]` in 1990 to `r nig_u5m[[1, 5]]` in 2015 (a reduction of `r ((nig_u5m[[26, 5]] - nig_u5m[[1, 5]]) / nig_u5m[[26, 5]]) * 100`%). Yet this was not enough to achieve the MDG-4 target. In 2015, Nigeria still recorded a total of **`r nig_u5death_2015[["u5_death"]]` million** deaths of under five children. 
+
+```{r "nig_stat table"}
+knitr::kable(nig_stat, caption = "table 2: MDG effect on child mortalities in Nigeria")
+```
+
+
+### Trends in Child Mortalities in Nigeria {.tabset .tabset-fade .tabset-pills}
+
+#### NMR
+
+```{r "nm trend", fig.cap = "fig 11: trend in NMR in Nigeria"}
+ggplotly(nm_trend)
+```
+
+
+#### IMR
+
+```{r "im trend", fig.cap = "fig 12: IMR trend in Nigeria"}
+ggplotly(im_trend)
+```
+
+
+#### U5MR
+
+```{r "u5m trend", fig.cap = "fig 13: U5MR trend in Nigeria"}
+ggplotly(u5m_trend)
+```
+
+
+## Conclusion
+
+Remarkable improvement occurred to the three indices of child mortalities examined in Nigeria. Yet these were not enough to achieve the Millennium Development Goal of reducing the 1990 mortality rates by two third. With a more ambitious Sustainable Development Goal of ending all forms of preventable child mortality (and reducing U5MR to 25 or less by 2030), so much work has to be done. During the MDGs, Nigeria was able to cause an annual decline of U5MR of `r signif(((nig_u5m[[15, 5]] - nig_u5m[[1, 5]]) / 15), 3)`. To achieve the SDG target, Nigeria needs an annual decline in U5MR of `r signif(((nig_u5m[[1, 5]] - 25) / 15), 3)`. Unfortunately however, from the recent events happening in the country (including the current outbreak of cerebrospinal meningitis spreading like wildfire across the country) one tend to ask what has to be done to be able to achieve this.
+
+[Child Survival Strategies](http://rehydrate.org/facts/gobi-fff.htm) definitely have a major role to play. Still, more important factors that affect childhood survival are more political in nature. These include:
+
+  - Ensuring universal basic education of all:
+  
+  - Female empowerment
+  
+  - Peace, political stability and government accountability
+  
+  - Stable and equitable distribution of income
+  
+  - Provision of adequate water, sanitation and hygiene (WASH)
+  
+  - Adequate and universally accessible basic health facilities.
+  
+Nigeria does not seem to be enjoying much of these in the recent times. With the protracted political unrest especially in the North and the South, the magnitude of corruption experienced in our government and the economic recession biting hard on the average Nigerian, it is almost difficult not to lose hope on achieving the SDG target. Pertinent to note that majority of the top 20 countries with highest U5MR are either currently experiencing or have just experienced war and political unrest.
+
+Nigerians have to wake up to making the government accountable. It is the average Nigerian whose child is dying of preventable illnesses. Our political office holders have to be committed to providing basic amenities necessary for the survival of our future generation. Death of over 3 million under five children in a year is not acceptable and the trend cannot afford to continue. Tracking of work done, progress made is therefore essential. Provide us with free and accessible open data for the average Nigerian to see the effect of our resources.
+
+On a final note, this animated (and interactive) graph summarises under-five mortality rates between 1990 and 2015. ^[continents can be activated and deactivated by clicking on them from the legend as necessary. To replay the animation, we recommend that you first drag the animation cursor to "1990" then press play] Pay particular attention to the following countries:
+
+  - Niger: highest mortality rate in 1990
+  
+  - Rwanda: the inital rapidly rising red point
+  
+  - Haiti: highest mortality rate in 2010
+
+```{r "animated plot", fig.cap = "fig 14: animated plot of global U5MR between 1990 and 2015"}
+ggplotly(animate, tooltip = c("country", "u5_pop", "u5_death", "u5mr")) %>%
+  animation_opts(2000, easing = "linear") %>%
+  animation_button(
+    x = 1, xanchor = "right", y = 0, yanchor = "bottom"
+  ) 
+```
+
+
+## Appendix {.hidden .toc-ignore}
+
+```{r}
+sessionInfo()
+```

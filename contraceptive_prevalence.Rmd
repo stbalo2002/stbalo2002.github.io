@@ -1,0 +1,164 @@
+---
+title: "Effect of Contraceptive Prevalence on Maternal and Child Health"
+date: "May 15, 2017"
+output: 
+  html_document: 
+    include:
+      in_header: _icon.html
+    toc: TRUE
+    toc_float: TRUE
+---
+
+<style>
+
+back-to-top {
+    position: fixed;
+    bottom: 5em;
+    right: -25px;
+    text-decoration: none;
+    color: #000000;
+    background-color: #f5f5f5;
+    background-image: url(../../img/top.png);
+    background-repeat: no-repeat;
+    font-size: 12px;
+    padding: 2.3em;
+    display: none;
+}
+
+
+#TOC {
+margin-top: 150px;
+}
+
+.no-show {
+margin-top: 10%;
+display: none;
+}
+
+small {
+color: #999;
+}
+
+</style>
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      message = FALSE, 
+                      warning = FALSE,
+                      fig.align = "center",
+                      fig.height = 6,
+                      out.width = "90%")
+source("./scripts/cp_script2.R")
+```
+
+## Introduction
+
+Contraception is the deliberate prevention of pregancy as a consequence of sexual intercourse. The methods of contraception includes the modern methods (condoms, pills, short-acting and long acting injectables, implants, intrauterine devices, patches etc), rhythm method, withdrawal method, and other traditional methods. [Contraceptive prevalence](http://who.int/reproductivehealth/topics/family_planning/contraceptive_prevalence/en/) (**CP**) is the percentage of women aged 15 to 49 who are either married or in-union and are currently using or whose sexual partner is currently using at least one method of contraception, regardless of the method used. The [practice of contraception is as old as human existence](http://www.emedicine.medscape.com/article/258507-overview#a1) with ancient writings dating back to 1850 BC (Kahun payrus), and the Soranus of Ephesus documentation of a spermicidal concoction. [Unmet need for family planning](http://www.un.org/en/development/desa/population/publications/pdf/family/trendsContraceptiveUse2015Report.pdf) (or “unmet need” for short) is defined as the percentage of married or in-union women of reproductive age who want to stop or postpone childbearing but who report that they are not using any method of contraception to prevent pregnancy. 
+
+Contraceptive is core to family planning, allowing couples and individuals to have the right to decide freely and responsibly if, how many and when to have children, and to have the information and the means to do so. It promotes the health of the mother and the children, and allows the parents to be able to fulfill their social and economic roles to the children. Every child has the right to adequate love, good clothing and quality education. These roles are especially more important for parents living in low and middle income countries where the cost of living tends to be high compared to the average family of income. 
+
+The International Conference on Population and Development (ICPD) in 1994 recommended that all countries seek to provide universal access to a full range of safe
+and reliable family-planning methods by the year 2015. Currently,  [Family Planning 2020](http://www.familyplanning2020.org) (which focuses on 69 of the world’s poorest countries), Every Woman Every Child (which has a broader strategy of accelerating improvements in the health of all women, children and adolescents by 2030), and the Sustainable Development Goals (target 3.7 and 5.6) are at the fore front front of ensuring universal access to sexual and reproductive health-care services, including family planning, information and education. 
+
+Like most other aspects of sexual and reproductive health, the two common monsters threatening embracement of contraception (family planning), especially in developing countries, revolves round religion and culture.
+
+
+## Data Source
+
+The data for this analysis include the contraceptive prevalence, under-five moratlity rate, and maternal mortality ratio data from the WorldBank Development Indicator data repository through the `WDI` R package.
+
+## Results
+
+### Current state of contraceptive prevalence {.tabset .tabset-fade .tabset-pills}
+
+Unsurprisingly, China has the highest contraceptive prevalence rate in the world (<small>fig. 1</small>). perhaps the more surprising ones are that Iran has a very high contraceptive prevalence (higher than that of the United States of America), and that an African country (Mauritius) makes the top 20 countries with the highest contraceptive prevelance rate in the world (<small>fig. 1</small>). All the countries in the bottom twenty are African countries with South Sudan having the lowest contraceptive prevalence rate while Nigeria has the 12th lowest globally (<small>fig. 2</small>).
+
+#### Top 20
+
+```{r "top_20", fig.cap = "fig. 1: Top 20 countries with the highest contraceptive prevalence in the world"}
+ggplotly(top_20)
+
+```
+
+
+#### Bottom 20 
+
+
+```{r "bottom_20", fig.cap = "fig. 2: first 20 countries with the lowest contraceptive prevalence globally"}
+
+ggplotly(bottom_20)
+
+```
+
+### Contaceptive prevalence trend 
+
+There is a global steady increase in contraceptive prevalence over the last 25 years with all continents (except Europe) experiencing this steady increase (<small>fig. 3</small>). Africa has the lowest prevalence of all the continents while the Americas have the highest prevalence (<small>fig. 3</small>). Yet, Mauritius has one of the highest contraceptive prevalence rate in the world (75.8%), and the North African countries of Egypt, Tunisia and Morocco have prevalent rates greater 50% (<small>fig. 3</small>). Iran has a contraceptive prevalence of 77.4% and Italy, a prevalence of 62.7%^[continents can be activated and deactivated by clicking on them from the legend as necessary].
+
+```{r "cp-trend", fig.cap = "fig. 3: Global trend in contraceptive prevalence from 1990 to 2015  (Nigeria is the deeper zig-zag blue line towards the bottom of the plot)", out.width = "80%"}
+
+cp_trend
+```
+
+
+### Contraceptive prevalence and maternal and child health {.tabset .tabset-fade .tabset-pills}
+
+Countries with high mortalities (maternal mortality ratio and under-five mortality rate) generally have low contraceptive prevalence (<small>figs 4 and 5</small>) suggesting that increasing contraceptive prevalence rate in these countries will help to reduce maternal and child mortalities.
+
+#### CP and maternal mortality
+
+```{r "mmr_cp", fig.cap = "fig. 4: contraceptive prevalence and maternal mortality ratio trend"}
+ggplotly(mmr_cp)
+```
+
+
+#### CP and under-five mortality
+
+```{r "u5mr_cp", fig.cap = "fig. 5: correlation between contraceptive prevalence and under-five mortality rate"}
+ggplotly(u5mr_cp)
+```
+
+
+### Predicting Contraceptive Prevalence
+
+Fitting a linear model regression for contraceptive prevalence using maternal mortality ratio, under-five mortality rates, continent and year as predictors. The model achieved an adustered R-squared value of `r round((glance(fit)[[2]]), 4)` (<small>table 1</small>). This further emphasises the relationship between contraceptive prevalence rate and maternal and child health.
+
+
+```{r "fit"}
+knitr::kable(glance(fit)[1:5], caption = "table 1: summary of linear regression of contraceptive prevalence on u5mr, mmr, continent and year")
+```
+
+
+### The unmet needs for contraception
+
+Countries with low contraceptive prevalence generally have higher unmet needs for family planning (<small>fig. 6</small>). This means many of these women wish to control their family size but are not able to. Nigeria and Niger however have lower unmet needs compared to other countries with similar contraceptive prevalence rate.
+
+```{r "cp_unmet", fig.cap = "fig. 6: global unmet needs for family planning"}
+ggplotly(cp_unmet)
+```
+
+
+### Contraceptive Prevalence in Nigeria
+
+Nigeria had a sharp increase in contraceptive prevalence rate between 1990 and 2000 with the peak ocurring in year 2000 (<small>fig. 7</small>). The rate has since been fluctuanting since then. The unmet need for family planning in the country has consistently been higher than the CP rate.
+
+```{r "cp_unmet_nig", fig.cap = "fig. 7: contraceptive prevalence and its unmet needs in Nigeria"}
+ggplotly(cp_unmet_nig)
+```
+
+
+## Conclusion
+
+There is a strong correlation between contraceptive prevalence and maternal and child mortalities. Increasing contraceptive prevalence will go a long way to help reduce maternal and child deaths. Contraception include the modern and traditional methods and has high prevalence even in religious countries (e.g. Iran, Morrocco, Egypt, Tunisia, Italy). 
+
+Nigeria has a low contraceptive prevalence. However, given the high value of its unmet needs, there is a large room to improve this by ensuring that all women have access to family planning services. [With Nigeria set to achieve a contraceptive prevalence rate of 36% by 2018](http://www.vanguardngr.com/2016/12/nigeria-will-achieve-36-contraceptive-prevalence-rate-fg-declares/), much needs to be done to make this a reality. Empowering both males and females with appropriate information on the benefits of family planning and addressing the taboos, superstitions and misinformations relating to it along side improving access are important to achieving the set target.
+
+
+## Appendix {.hidden .toc-ignore}
+
+```{r}
+sessionInfo()
+```
+
+

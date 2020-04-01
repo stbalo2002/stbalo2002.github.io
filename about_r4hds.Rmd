@@ -1,0 +1,61 @@
+---
+title: "About R4HDS"
+output: 
+  html_document: 
+    include:
+      in_header: _icon.html
+    toc: TRUE
+    toc_float: TRUE
+---
+
+<style>
+
+#TOC {
+margin-top: 150px;
+}
+
+</style>
+
+
+> "<i>To measure is to know. If you can not measure it, then you can not improve it</i>"
+  >
+  >   <small>Lord Kelvin</small>
+
+R4HDS was born out of the desire to show the power of data in enlightening and transforming the health system especially in Africa. From the words of <strong>Lord Kelvin</strong>, you cannot improve what you do not understand. To understand, data has to be presented to demonstrate the magnitude of the problem.
+
+Two particular data revolutions in healthcare readily comes to mind, the report of the [Institute of Medicine - *"to err is human"*](https://en.wikipedia.org/wiki/To_Err_is_Human_(report)) which has transformed healthcare quality and patient safety since its release in 1999. Also is [Hans Rosling's](https://en.wikipedia.org/wiki/Hans_Rosling) works in promoting the use of data to explore development including the famous [*"Don't Panic - the Truth about Population"*](http://gapminder.org/videos/dont-panic-the-facts-about-population/).
+
+### Vision
+
+  >*"Every system is perfectly designed to achieve the results it gets"*
+  >
+  >   <small>Edward Deming </small>
+
+We look forward to a world where every human has adequate health information and are able to access quality and universal health care at the appropriate time. To achieve this, there is an urgent need for data revolution especially in Africa. Facebook announced recently of plans to build its <b>ninth</b> data plant. This further drives up the dire importance and urgency of data in this computationally advanced generation. 
+
+Open data and data science will help in making significant contribution to the attainment of the [Sustainable Development Goals](https://sustainabledevelopment.un.org/). We are all involved in this at our respectful place of work. If we work together, we can make this dream come through for the sake of our future.
+
+### Purpose and Mission
+
+The global world is striving towards a transparent system of free and open-source data and application softwares. The power of these two in speeding up the much desired change in the health sector cannot be over emphasized. To this end, the World Health Organization created the [Global Health Observatory](http://who.int/gho/en/), the World Bank developed the [World Development Indicators](http://data.worldbank.org/data-catalog/world-development-indicators), and the United Nations' [World Population Prospects 2015](https://esa.un.org/unpd/wpp/) data repositories. There also exists several other data repositories created by each country (especially in the developed world).
+  
+This site uses open data from these sources to visually present results using graphs, inferences and modelling to the general public. The website is totally developed within the [RStudio](https://www.rstudio.org) IDE which makes it completely reproducible!!!
+
+> "<i>A picture says more than a thousand words</i>"
+
+
+It will be interesting to be able to present local data from Nigeria and see how different regions compare. Though there exists the [National Bureau of Statistics](http://nigerianstat.gov.ng) and the [Nigeria National Data Archive](http://nigerianstat.gov.ng/nada/index.php/home) (not sure if many know about its existence), the team has not been able to access these databases despite request submissions.
+
+### Acknowledgements
+
+The authors are immersely grateful to the creators and maintainers of <b>[R](https://cran.r-project.org/)</b>, <b>[RStudio](https://www.rstudio.com)</b> IDE, and the numerous packages used in building this website. Special appreciation to:
+
+  @) [Hadley Wickham](http://hadley.nz/) of <strong>RStudio</strong>
+  
+  @)  [Yuhui Xie](https://yihui.name/) of <strong>RStudio</strong>
+  
+  @)  [Carson Sievert](https://cpsievert.github.io) of <strong>ropensci</strong>
+  
+  @)  [Vincent Arel-Bundock](https://CRAN.R-project.org/package=WDI)  
+
+  

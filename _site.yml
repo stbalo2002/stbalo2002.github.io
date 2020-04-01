@@ -1,0 +1,12 @@
+name: "R for Healthcare DataScience"
+output:
+  html_document:
+    highlight: textmate
+    include:
+      after_body: 
+        - _footer.html
+        - _disqus.html
+    css: 
+      - css/styles.css
+      - css/r4hds.css
+output_dir: "."

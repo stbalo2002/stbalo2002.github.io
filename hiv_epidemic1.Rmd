@@ -1,0 +1,289 @@
+---
+title: "HIV Epidemic: Gains and Challenges <small>(PART I)</small>"
+date: "18 September 2017"
+output: 
+  html_document: 
+    fig_height: 5
+    fig_width: 2
+    include:
+      in_header: _icon.html
+    toc: yes
+    toc_float: yes
+---
+
+<style>
+
+back-to-top {
+    position: fixed;
+    bottom: 5em;
+    right: -25px;
+    text-decoration: none;
+    color: #000000;
+    background-color: #f5f5f5;
+    background-image: url(../../img/top.png);
+    background-repeat: no-repeat;
+    font-size: 12px;
+    padding: 2.3em;
+    display: none;
+}
+
+
+#TOC {
+margin-top: 150px;
+}
+
+.no-show {
+margin-top: 10%;
+display: none;
+}
+
+small {
+color: #999;
+}
+
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      message = FALSE, 
+                      warning = FALSE,
+                      fig.align = "center",
+                      out.width = "80%")
+source("./scripts/hiv_script3.R")
+```
+
+
+## Introduction
+
+### Brief History
+
+The Human Immunodeficiency Virus (HIV) is a disease that decreases and weakens the body's ability to fight off infections and illnesses progressively over time causing infections which should ordinarily be mild and easy to treat to become dangerous and life threatening. A person is said to have HIV when they test positive to the virus in their blood stream. However, a person is not said to have AIDS until they start showing clinical symptoms of the disease. Therefore, not everyone who is infected with HIV has AIDS but anyone with HIV, although may appear healthy, can transmit the virus to another person. All untreated cases of HIV will eventually progress to AIDS.
+
+Globally, Acquired Immune Deficiency Syndrome (AIDS) was first described in 1981. The first case in Nigeria was not until 1985 in Lagos. Since then, HIV/AIDS has rapidly affected millions of people worldwide and has become one of the greatest public health challenges of this generation.
+
+
+### Modes of Transmission
+
+The Virus is transmitted through:
+
+@) Unprotected penetrative sexual activity with someone who is infected with the virus (oral, anal or vaginal)
+
+@)  Contact with infected body fluids (e.g. blood and blood products, and the reproductive tract fluids)
+
+@)  Sharing of unsterilized sharps like needles and blades
+
+The transmission of the virus is largely perpertuated by the cycle of silence -> ignorance -> fear -> stigma and -> discrimination. Key populations at increased risk of HIV infection include sex workers, people who abuse injectable drugs (usually controlled drugs), people with more than one sexual partners, transgender people, prisoners and men who have sex with men, orphans, internally displaced persos, uniform personnels, and health workers. 
+
+### The Impact
+
+The scourge of the pandemic are innumerable. Among the impacts of HIV include: 
+
+- It disproportionately affects the workforce of a country reducing their number and causing lost of productive hours
+
+-  It decreases the life expectancy of a country. This is revealed in the loss of life expectancy at birth for most developing countries due to improved healthcare services and standard of living being loss to the pandemic.
+
+- Discrimination, stigma and shame to the infected person, family and friends, and the community.
+
+- Transmission of the disease burden to the unborn generation
+
+- Increased number of orphaned children, who are also more likely to have the disease and to suffer from mortality, deprivations (mental, psychological, school etc), and to be subject to abuse.
+
+HIV disproportionately affect the young population (ages 15-24 years). Adolescent girls and young women aged 15–24 years are at particularly high risk of HIV infection, accounting for 20% of new HIV infections among adults globally in 2015, despite accounting for just 11% of the adult population. In geographical areas with 
+higher HIV prevalence, the gender imbalance is more pronounced. In sub-Saharan 
+Africa, adolescent girls and young women account for a 25% of new HIV infections 
+among adults, and women account for 56% of new HIV infections among adults. 
+Harmful gender norms and inequalities, insufficient access to education and sexual and reproductive health services, poverty, food insecurity and violence, are at the root of the increased HIV risk of young women and adolescent girls.
+
+### Control
+
+Arresting and reversing the spread of the pandemic has been a global concern for many years now. Extraordinary accomplishments were recorded during the 15 years of the MDGs. Currently, the Sustainable Development Goals is committed to ending the AIDS epidemic by 2030.  The achievements of the MDGs have inspired global confidence that this target can be achieved. UNAIDS recommends a Fast-Track approach with a determination to achieve the 90–90–90 treatment target by 2020, whereby 90%  of people living with HIV know their HIV status, 90% of people who know their HIV-positive status are accessing treatment and 90% of people on treatment have suppressed viral loads. 
+
+There is also the national Minimum Prevention package intervention (MPPI) plan aimed at instituting behavioural, biomedical and structural changes in the individuals, community and the larger society to combat the scourge of the disease.
+
+
+## Methodology
+
+
+### Data Source
+
+The World Bank [World Development Indicator](http://data.worldbank.org/data-catalog/world-development-indicators) provided the data for the cases of HIV in the different age-groups. The United Nations' [World Population Prospects 2015](https://esa.un.org/unpd/wpp/) databank was the source of the population figures used for the analysis.
+
+### Discrepancies
+
+We acknowledge the descrepancies presented in this data analysis and other similar presentations. The presentations here generally tend to underestimate the values. The reasons for this might include:
+  
+  - Differences in the source of the cases and the population at risk. Given that these data are provided by two different bodies who use different methods of data collection, their might have been differences in the methodology used to estimate the cases and the population at risk from the reference population.
+  
+  - Post-data collection processing are usually done to make adjustments for under-reporting, disasters, data quality and so on. None of these has been done for this presentation and as such, the raw data is used directly for this analysis.
+  
+For actual data values, kindly visit the relevant web pages including [WHO](http://www.who.int/gho/hiv/en/), [UN](http://aidsinfo.unaids.org/) and [NACA](http://naca.gov.ng/nigeria-prevalence-rate/).
+
+
+## Results
+
+
+### Global Distribution {.tabset .tabset-fade .tabset-pills}
+
+The Millenium Development Goals (MDGs) have been able to slow down the initial rapid increase in the prevalence rate of HIV only rising by `r 0.5 - 0.48`% between year 2000 and 2015 (<small>fig. 1</small>). The bulk of the achievement were achieved in the first 10 years of the MDGs being able to halt the prevalence between 2005 and 2015 at 0.49%. The number of People Living With HIV/AIDS (PLWHA) has mirrored the prevalence rate. As at 2015, over 30 million people worldwide are living with the disease (<small>fig. 2</small>). Africa has largely contributed to the bulk of the population of people with HIV/AIDS accounting for almost 80% of the People Living with HIV/AIDS (PLWHA) in the year 2015 (<small>figs. 3 and 4</small>).
+
+```{r "h_prev", fig.cap = "fig. 1: Trends in HIV Prevalence"}
+ggplotly(h_prev)
+```
+
+
+#### Global
+
+
+```{r "h_trend", fig.cap="fig. 2: Trend in global population of people with HIV"}
+ggplotly(h_trend)
+```
+
+#### Continental
+
+```{r "h_trend2", fig.cap="fig. 3: Continental trend in population of people with HIV"}
+ggplotly(h_trend2)
+```
+
+#### 2015
+
+```{r, "h_1", fig.cap = "fig. 4: Number of people with HIV per continent in 2015"}
+ggplotly(h_1)
+```
+
+
+### Country Distribution {.tabset .tabset-fade .tabset-pills}
+
+South Africa and Nigeria top the list of countries with the highest population of PLWHA in 2015 and nine countries have population of PLWHA above 1 million (<small>fig. 5</small>). India, Brazil, Indonesia and Thailand are the only non African country in the top 20. Giving the large population of these countries, it is not surprising their prevalence rate is not high enough to be in the top 20 of countries with the highest prevalence rate of HIV.Swaziland tops the list with about 1 in 6 people living with the disease (<small>fig. 6</small>). Closely followed are Botswana, Lesotho and South Africa (<small>fig. 6</small>). Nigeria ranks 17 in the list of countries with the highest prevalence of HIV (<small>fig. 6</small>).
+
+
+#### Population
+
+```{r "h_2", fig.cap="fig. 5: Top 20 countries with highest population of HIV"}
+ggplotly(h_2)
+```
+
+#### Prevalence
+
+```{r "h_3", fig.cap="fig. 6: top 20 countries with highest percentage of people with HIV"}
+ggplotly(h_3)
+```
+
+<!---
+## Trends in top 10 countries
+
+```{r "a1", fig.cap = "fig 7: HIV trend in the 10 most affected countries"}
+ggplotly(a1)
+```
+
+--->
+
+### Children {.tabset .tabset-fade .tabset-pills}
+
+The prevalence of HIV in children rose rapidly between 1990 and 2005 to a peak of 0.12%. It then plateaued at this value till 2010, and declined afterwards to a prevalence of 0.09% in 2015. The population of children with HIV peaked in year 2008 at almost 2 million and has steadily declined since then with Africa responsible for most of the decline (<small>figs. 9 and 10 </small>). Compared to population of HIV in the general population, about 19 in 20 children with HIV are in Africa as at year 2015 (<small>fig. 11</small>).
+
+```{r, "hc_prev", fig.cap = "fig. 8: Global trend in prevalence of HIV"}
+ggplotly(hc_prev)
+```
+
+#### Global
+
+```{r "hc_trend", fig.cap = "fig 9: trend in population of children with HIV"}
+ggplotly(hc_trend)
+```
+
+#### Continental
+
+```{r "hc_trend2", fig.cap = "fig. 10: trend in population of children with HIV per continent"}
+ggplotly(hc_trend2)
+```
+
+#### 2015 
+
+```{r "hc_1", fig.cap = "fig. 11: Distribution of children living with HIV in 2015 per continent"}
+ggplotly(hc_1)
+```
+
+
+
+### Country Distribution {.tabset .tabset-fade .tabset-pills}
+
+Nigeria has the highest population of children living with HIV in 2015 (<small>fig. 12</small>). This is closely followed by South Africa. Only Indonesia is the only non-african country in the top 20 countries with the highest population of children with HIV (<small>fig. 11</small>). It is also interesting to note that despite India having the third highest population of people with HIV in the general population, the population of children with HIV in the country is rather low. All the countries in the top 20 with highest prevalence of HIV in children are African countries with Swaziland leading the chart with a prevalence of 2.1% and Nigeria occupying position 17 (<small>fig. 12</small>).
+
+
+#### Population
+
+```{r "hc_2", fig.cap = "fig 12: top 20 countries with the highest population of children with HIV"}
+ggplotly(hc_2)
+```
+
+#### Prevalence
+
+```{r "hc_3", fig.cap = "fig 13: top 20 countries with the highest prevalence of HIV in children"}
+ggplotly(hc_3)
+```
+
+<!---
+#### Trends in top 10 countries
+
+```{r "a2", fig.cap = "fig 13: U5MR trend in Nigeria"}
+ggplotly(a2)
+```
+
+--->
+
+### Young adults {.tabset .tabset-fade .tabset-pills}
+
+The prevalence of HIV in young adults increased steadily from 1990 till year 2000 and started declining afterwards. The prevalence in female is generally twice as that of males for most countries. African countries, especially those in the southern part have the highest prevalences for males and females with Swaziland toping the list (over 7% and 16% in males and females respectively). Nigeria occupies the 15th position and 19th position in the top 20 countries with highest prevalence of HIV in young women and young men respectively.
+
+```{r "animate", fig.cap="fig. 13: HIV prevalence trend in young adults"}
+anim
+```
+
+#### young women
+
+```{r "ywplot", fig.cap="fig. 14: Prevalence of HIV in young women in 2015"}
+ggplotly(prev_ywplot)
+```
+
+#### young men
+
+```{r "ymplot", fig.cap="fig. 15: Prevalence of HIV in young men in 2015"}
+ggplotly(prev_ymplot)
+```
+
+
+
+### HIV in Nigeria
+
+There was an initial sharp increase in the number of people living with HIV in Nigeria before the MDGs, the rate of increase reduced drastically in the first half of the MDGs and has steadily started rising since then. Currently, an estimated 3.5 million Nigerians are living with the virus. The prevalence of HIV in the different age-groups is summarised in (<small> fig. 17 </small>).
+
+```{r, "nig2", fig.cap = "fig. 16: Population of people living with HIV in Nigeria"}
+ggplotly(nig2)
+```
+
+```{r "nig1", fig.cap="fig. 17: Trends in HIV prevalence in Nigeria"}
+ggplotly(nig1)
+```
+
+## Discussion and Conclusion
+
+Africa accounts for the bulk of the burden of HIV/AIDS in the world. This is more so in children where about 19 out of every 20 children with HIV are in Africa. The MDG had great impact in reducing the HIV burden though much still needs to be done to achieve the United Nations SDG goal and the UNAIDS vision 2020 target. HIV prevalence in young adults have also shown remarkable improvements, though the burden is still twice as more in young women compared to young men.
+
+Parts of the efforts implemented in HIV/AIDS prevention and control include: 
+
+  - Anti-retroviral therapy (ART) to victims
+  - Prevention of mother to child transmission of the virus through the use of ART drugs in pregnancy for HIV positive women
+  - Sensitization and awareness about HIV/AIDS, including its prevention and control, especially in young adults.
+  
+In the part 2 of this presentation, we will be visualizing the impact of these interventions and what can be done to improve success. 
+
+## References
+
+1. UNAIDS, Global AIDS Update; Joint United Nations Programme on HIV/AIDS 2016.
+
+## Appendix {.hidden .toc-ignore}
+
+```{r}
+sessionInfo()
+```
