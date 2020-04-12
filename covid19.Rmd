@@ -58,7 +58,7 @@ source("./scripts/covid19.R")
 
 ## Introduction 
 
-The world has done several analysis on the current novel coronavirus disease (COVID-19) pandemic. The bulk of the analysis has been focused on developed and high-income countries. This is a brief analysis of the current trend in Africa. I will be updating the charts daily till the pandemic is contained, hopefully this will happen soon.   
+The world has done several analysis on the current novel coronavirus disease (COVID-19) pandemic. The bulk of the analysis has been focused on developed and high-income countries. This is a brief analysis of the current trend with some focus on Africa. I will be updating the charts periodically till the end of the pandemic, hopefully this will happen soon.   
 
 
 It is no longer news that covid-19 has witnessed exponential growth since the beginning of March spreading from **`r nrow(n_count)`** countries at the end of February 2020 to **`r nrow(n_count2)`** as at **`r format(Sys.Date(), "%b %d %Y")`**. The number of of confirmed cases have also grown astronimically from *86, 000* to over **`r scales::comma(current_cases[[1, 2]])`** during the same period of time. We briefly look at this global trend and compare this with the current trend seen in Africa. The trend in Africa is much similar to the global trend, except for some time lag at the onset with less than 5 confirmed cases at the beginning March to **`r scales::comma(africa_cases[[1, 2]])`** confirmed cases as at today.   
@@ -98,9 +98,9 @@ ggplotly(n_countries)
 
 ## Country-specific Trends {.tabset .tabset-fade .tabset-pills}
 
-It is no longer news that China, being the country where the first case was discovered experienced the pandemic much early and appear to have been able to contain the disease. The other country that has done remarkably well in containment appears to be South Korea. The country was able to flattening the curve early, something most other countries experiencing exponential growth have not been able to do.  
+China, being the country where the first case was discovered experienced the pandemic much early and have been able to contain the disease. The other country that has done remarkably well in containment appears to be South Korea. The country was able to flatten the curve early, something most other countries experiencing exponential growth have not been able to do.  
 
-The `Top 7 Countries` plot shows the trend across the top most hit countries excluding China and Italy to allow for better appreciation of the trend in these countries.  
+The `Top 7 Countries` plot shows the trend across the top most hit countries. The United States alone is contributing to close to one-third of the global number of confirmed cases.  
 
 
 ### Globe
@@ -155,6 +155,16 @@ ggplotly(animate,
   ) 
 ```
 
+
+## COVID-19 Dashboards
+
+There are so many lovely interactive dashboards for COVID-19 that have been created. I am sharing the three below because I believe the sources are reliable, trusted, authentic, and you will find them very useful. Several other persons have also done great visualizations that I believe you will find relatively easily with a little help from [**Google**](https://google.com):   
+
+* [**WHO COVID-19 Dashboard**](https://who.sprinklr.com/)   
+
+* [**London School of Hygiene and Tropical Medicine COVID-19 tracker**](https://vac-lshtm.shinyapps.io/ncov_tracker/)  
+
+* [**John Hopkins University of Medicine COVID-19 map**](https://coronavirus.jhu.edu/map.html)  
 
 
 ## Conclusion
