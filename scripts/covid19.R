@@ -199,7 +199,7 @@ world <- covid_df %>%
   ggplot(aes(x = date, y = cases, color = country)) + 
   geom_line(size = 1) + 
   theme_minimal() +
-  # theme(legend.position = "none") + 
+  theme(legend.position = "none") +
   scale_x_date(date_breaks = "1 week", date_labels = "%b %d", minor_breaks = NULL) +
   scale_y_continuous(breaks = seq(from = 0, to = 1000000, by = 100000), labels = scales::comma, minor_breaks = NULL) +
   rotateTextX(angle = 45) +
