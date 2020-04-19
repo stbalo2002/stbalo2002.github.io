@@ -4,6 +4,8 @@ library(tidyverse)
 library(plotly)
 library(lubridate)
 library(ggExtra)
+library(gganimate)
+library(magick)
 # library(wpp2019)
 
 
@@ -130,10 +132,10 @@ covid_df <- left_join(covid_cases2,
 
 covid_df$country <- as_factor(covid_df$country)
 
-## number of countries affected at end of February 2020
+## number of countries affected at the beginning of March
 
 n_count <- covid_df %>%
-  filter(date == as.Date("2020-02-29")) %>%
+  filter(date == as.Date("2020-03-01")) %>%
   group_by(country, date) %>%
   summarise(cases = sum(cases)) %>%
   filter(cases != 0)
@@ -141,10 +143,10 @@ n_count <- covid_df %>%
 
 
 
-## no of cases as at 30th March 2020
+## no of cases as at yesterday
 
 n_count2 <- covid_df %>%
-  filter(date == as.Date("2020-03-30")) %>%
+  filter(date == Sys.Date() - 1) %>%
   group_by(country, date) %>%
   summarise(cases = sum(cases)) %>%
   filter(cases != 0)
@@ -161,8 +163,8 @@ global_trend <- covid_df %>%
   ggplot(aes(x = date, y = cases)) + 
   geom_line(size = 1, colour = "darkred") + 
   theme_minimal() +
-  scale_y_continuous(breaks = seq(from = 0, to = 2000000, by = 200000), labels = scales::comma, minor_breaks = NULL) + 
-  scale_x_date(date_breaks = "1 week", date_labels = "%b %d", minor_breaks = NULL) + 
+  scale_y_continuous(breaks = seq(from = 0, to = 5000000, by = 500000), labels = scales::comma, minor_breaks = NULL) + 
+  scale_x_date(date_breaks = "2 week", date_labels = "%b %d", minor_breaks = NULL) + 
   labs(x = "Date", 
        y = "No of cases",
        title = "Global reported number of confirmed COVID19 cases") +
@@ -184,7 +186,7 @@ n_countries <- n_country %>%
   ggplot(aes(x = date, y = count)) + 
   geom_line(colour = "powderblue", size = 1.5) +
   theme_minimal() +
-  scale_x_date(date_breaks = "1 week", date_labels = "%b %d", minor_breaks = NULL) +
+  scale_x_date(date_breaks = "2 week", date_labels = "%b %d", minor_breaks = NULL) +
   scale_y_continuous(breaks = seq(from = 0, to = 200, by = 20), minor_breaks = NULL) + 
   labs(y = "No of countries affected", 
        title = "No of countries affected by COVID-19") +
@@ -200,68 +202,12 @@ world <- covid_df %>%
   geom_line(size = 1) + 
   theme_minimal() +
   theme(legend.position = "none") +
-  scale_x_date(date_breaks = "1 week", date_labels = "%b %d", minor_breaks = NULL) +
-  scale_y_continuous(breaks = seq(from = 0, to = 1000000, by = 100000), labels = scales::comma, minor_breaks = NULL) +
+  scale_x_date(date_breaks = "2 week", date_labels = "%b %d", minor_breaks = NULL) +
+  scale_y_continuous(breaks = seq(from = 0, to = 2000000, by = 200000), labels = scales::comma, minor_breaks = NULL) +
   rotateTextX(angle = 45) +
   labs(x = "Date", 
        y = "No of Cases",
-       title = "COVID19 trend around the World") #+
-  # geom_text(data = covid19, aes(label = `country/region`), check_overlap = T)
-
-
-
-
-
-
-
-# world2 <- covid19_2 %>%
-#   group_by(`country/region`, `date`) %>%
-#   summarise(cases = sum(cases)) %>%
-#   filter(`country/region` != "China") %>% 
-#   filter(`country/region` != "Italy") %>%
-#   ggplot(aes(x = date, y = cases, color = `country/region`)) + 
-#   geom_line(size = 1) + 
-#   theme_minimal() +
-#   theme(legend.position = "none") + 
-#   scale_x_date(date_breaks = "1 week", date_labels = "%b %d", minor_breaks = NULL) +
-#   scale_y_continuous(breaks = seq(from = 0, to = 50000, by = 5000), labels = scales::comma, minor_breaks = NULL) + 
-#   labs(x = "Date", 
-#        y = "No of Cases",
-#        title = "COVID19 trend around the World (Excluding China and Italy")
-# 
-# 
-# 
-# ggplotly(world2)
-
-
-
-
-## Top 10 countries in the world excluding China and Italy
-
-world2 <- covid_df %>%  # select the data
-  group_by(country, date) %>%  # one entry per country per day
-  summarise(cases = sum(cases)) %>%  # add all the cases for the country
-  pivot_wider(names_from = date, values_from = cases) %>%
-  arrange(desc(`2020-03-30`))
-
- world2 <- world2[c(1:7), ]  %>% ## filtering 10 worst hit countries apart                                   from China and Italy
-  
-  pivot_longer(-country, names_to = "date", values_to = "cases")  #converting back to long                                                format
-  
-
-world2$date <- lubridate::ymd(world2$date)
-
-world2_plot <- world2 %>%
-  ggplot(aes(x = date, y = cases, color = country)) + 
-  geom_line(size = 1) + 
-  theme_minimal() +
-  scale_x_date(date_breaks = "1 week", date_labels = "%b %d", minor_breaks = NULL) +
-  scale_y_continuous(breaks = seq(from = 0, to = 500000, by = 50000), labels = scales::comma, minor_breaks = NULL) + 
-  labs(x = "Date", 
-       y = "No of Cases",
-       title = "COVID19 trend for top 7 hit countries") +
-  rotateTextX(angle = 45)
-
+       title = "COVID19 trend around the World") 
 
 
 
@@ -283,8 +229,8 @@ africa_trend <- africa %>%
   ggplot(aes(x = date, y = cases)) + 
   geom_line(size = 1, colour = "darkred") + 
   theme_minimal() +
-  scale_y_continuous(breaks = seq(from = 0, to = 20000, by = 2000), labels = scales::comma, minor_breaks = NULL) + 
-  scale_x_date(date_breaks = "1 week", date_labels = "%b %d", minor_breaks = NULL) + 
+  scale_y_continuous(breaks = seq(from = 0, to = 50000, by = 5000), labels = scales::comma, minor_breaks = NULL) + 
+  scale_x_date(date_breaks = "2 week", date_labels = "%b %d", minor_breaks = NULL) + 
   labs(x = "Date", 
        y = "No of Cases",
        title = "COVID19 trend in Africa") +
@@ -316,8 +262,8 @@ africa2_plot <-  africa2 %>%  # select the data
   ggplot(aes(x = date, y = cases, colour = country)) +
   geom_line(size = 1) +
   theme_light() + 
-  scale_x_date(date_breaks = "1 week", date_labels = "%b %d", minor_breaks = NULL) +
-  scale_y_continuous(breaks = seq(from = 0, to = 5000, by = 500), labels = scales::comma, minor_breaks = NULL) + 
+  scale_x_date(date_breaks = "2 week", date_labels = "%b %d", minor_breaks = NULL) +
+  scale_y_continuous(breaks = seq(from = 0, to = 10000, by = 1000), labels = scales::comma, minor_breaks = NULL) + 
   labs(x = "Date", 
        y = "No of Cases",
        title = "COVID19 trend in top 10 hit countries in Africa") +
@@ -332,7 +278,7 @@ ngr <- covid_df %>%
   ggplot(aes(x = date, y = cases)) + 
   geom_line(size = 1.5, color = "lightblue") + 
   theme_minimal() +
-  scale_x_date(date_breaks = "1 week", date_labels = "%b %d", minor_breaks = NULL) +
+  scale_x_date(date_breaks = "2 week", date_labels = "%b %d", minor_breaks = NULL) +
   scale_y_continuous(breaks = seq(from = 0, to = 500, by = 50), minor_breaks = NULL) + 
   labs(x = "Date", 
        y = "No of Cases",
@@ -348,9 +294,9 @@ ngr <- covid_df %>%
 df <- covid_df %>%
   mutate(month = month(covid_df$date),
          day = day(covid_df$date)) %>%
-  filter(month == 3) %>%
-  dplyr::rename(March = day) %>%
-  group_by(March, country, continent) %>%
+  filter(month == 4) %>%
+  dplyr::rename(April = day) %>%
+  group_by(April, country, continent) %>%
   summarise(deaths = sum(deaths),
             cases = sum(cases))
 
@@ -360,7 +306,7 @@ animate <- df %>%
              y = deaths, 
              color = continent)) + 
   
-  geom_point(aes(frame = March, 
+  geom_point(aes(frame = April, 
                  ids = country, 
                  na.rm = FALSE),
              size = 5,
@@ -374,17 +320,143 @@ animate <- df %>%
   theme_minimal() +
   
   scale_x_continuous(breaks = seq(from = 0, 
-                                  to = 200000, 
-                                  by = 20000), 
+                                  to = 1000000, 
+                                  by = 100000), 
                      labels = scales::comma, 
                      minor_breaks = NULL) + 
   
   scale_y_continuous(breaks = seq(from = 0,
-                                  to = 20000,
-                                  by = 2000),
+                                  to = 50000,
+                                  by = 10000),
                      labels = scales::comma,
                      minor_breaks = NULL)
 
+
+
+########################### more analysis for Nigeria
+
+df_ng <- read_csv("C:/Users/stbal/Google Drive/R projects/covid_nigeria/nigeria_data.csv")
+
+df_ng2 <- read_csv("C:/Users/stbal/Google Drive/R projects/covid_nigeria/nigeria_data2.csv")
+
+
+
+
+# trend_plot <- function(df) {
+#   
+#   p <-  df %>%
+#     ggplot(aes(x = date, 
+#                y = count, 
+#                color = region_province)) +
+#     geom_line(aes(group = state)) +
+#     theme_minimal() + 
+#     scale_x_date(date_breaks = "2 week", 
+#                  date_labels = "%b %d", 
+#                  minor_breaks = NULL) +
+#     labs(y = "cummulative")
+#   
+#   ggplotly(p, tooltip = c("date", "state", "count"))
+#     
+# }
+
+
+
+
+indicator_plots <-  df_ng2 %>%
+  filter(time_stamp == "cummulative") %>%
+  group_by(indicator, date) %>%
+  summarise(across(is.numeric, sum)) %>%
+  ggplot(aes(x = date, 
+             y = number, 
+             color = indicator)) +
+  geom_line() +
+  theme_minimal() + 
+  scale_x_date(date_breaks = "2 week", 
+               date_labels = "%b %d", 
+               minor_breaks = NULL) +
+  labs(y = "cummulative")
+  
+
+  
+
+##### make animated plots for top seven affected states by cases
+
+p <-  df_ng %>%
+  filter(date > Sys.Date() - 40) %>% # select most recent 40 days
+  group_by(date) %>%
+  arrange(desc(cases_cum)) %>% # arrange by desc the assigned indicator
+  slice(1:7) %>% # take first 7 for each day
+  mutate(rank = 1:7) %>%
+    
+  ggplot(aes(x = rank, 
+             group = state,
+             fill = state)) + 
+    
+  geom_tile(aes(y = cases_cum / 2,
+                height = cases_cum,
+                width = 0.8),
+            alpha = 0.8, 
+            color = NA) +
+  
+  geom_text(aes(y = 0, 
+                label = paste(state, " ")), 
+            vjust = 0.2, 
+            hjust = 1) + 
+  
+  geom_text(aes(y = cases_cum, 
+                label = cases_cum, 
+                hjust = 0)) + 
+  
+  coord_flip(clip = "off", 
+             expand = FALSE) +
+  
+  scale_x_reverse() +
+  
+  guides(color = FALSE, 
+         fill = FALSE) +
+  
+  theme_minimal() +
+  removeGridY() +
+  
+  theme(
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    panel.grid.major = element_blank(),
+    panel.grid.major.x = element_line( size=.1, color="grey" ),
+    panel.grid.minor.x = element_line( size=.1, color="grey" ),
+    plot.title = element_text(size = 25, 
+                              hjust = 0.5, 
+                              face = "bold", 
+                              colour= "grey", 
+                              vjust = -1),
+    plot.subtitle = element_text(size = 18, 
+                                 hjust = 0.5, 
+                                 face = "italic", 
+                                 color = "grey"),
+    plot.caption = element_text(size = 10, 
+                                hjust = 0.5, 
+                                face = "italic", 
+                                color="grey"),
+    plot.margin = margin(2,2, 2, 4, "cm")
+  )
+
+anim <- p + 
+  transition_states(date, 
+                    transition_length = 5, 
+                    state_length = 1) +
+  ease_aes("cubic-in-out") +
+  view_follow(fixed_x = TRUE)  +
+  labs(title = 'Total number cases at: {closest_state}',  
+       subtitle  =  "Top 7 affected States",
+       caption  = "Data Source: Nigeria Centre for Diseases Control")
+  
+
+# anim_save("animated_plot.gif", anim)
+
+animate(anim, 200, fps = 20, 
+        renderer = gifski_renderer("gganim.gif"))
 
 
 
