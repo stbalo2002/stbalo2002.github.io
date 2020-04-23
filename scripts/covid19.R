@@ -17,19 +17,38 @@ library(magick)
 
 file_cases <- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
 
-Africa <- c("Algeria", "Angola", "Benin", "Botswana", "Burkina Faso", "Cabo Verde", "Cameroon", "Central African Republic", "Chad", "Congo (Brazzaville)", "Congo (Kinshasa)", "Cote d'Ivoire", "Djibouti", "Egypt", "Equatorial Guinea", "Eritrea", "Eswatini", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "Guinea-Bissau", "Kenya", "Liberia", "Libya", "Madagascar", "Mali", "Mauritania", "Mauritius", "Morocco", "Mozambique", "Namibia", "Niger", "Nigeria", "Papua New Guinea", "Rwanda", "Saint Vincent and the Grenadines", "Senegal", "Seychelles", "Somalia", "South Africa", "Sudan", "Tanzania", "Togo", "Tunisia", "Uganda", "Zambia", "Zimbabwe")
 
-Asia <- c("Afghanistan", "Armenia", "Azerbaijan", "Bahrain", "Bangladesh", "Bhutan", "Brunei", "Cambodia", "China", "India", "Indonesia", "Iran", "Iraq", "Israel", "Japan", "Jordan", "Kazakstan", "Korea, South", "Kuwait", "Kyrgyzstan", "Lebanon", "Malaysia", "Maldives", "Mongolia", "Nepal", "Oman", "Pakistan", "Peru", "Qatar", "Saudi Arabia", "Singapore", "Sri Lanka", "Taiwan*", "Thailand", "United Arab Emirates", "Uzbekistan", "Vietnam", "Syria", "Timor-Leste", "Laos", "West Bank and Gaza", "Burma")
+############ Africa Regions
 
-`South America` <- c("Argentina", "Brazil", "Chile", "Colombia", "Ecuador", "Guyana", "Paraguay", "Suriname", "Trinidad and Tobago", "Venezuela")
 
-Australia <- c("Australia", "Fiji", "New Zealand")
+## Add Africa Regions
 
-Europe <- c("Albania", "Andorra", "Austria", "Belarus", "Belgium", "Bolivia", "Bosnia and Herzegovina", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland", "France", "Georgia", "Germany", "Greece", "Greece", "Holy See", "Hungary", "Iceland", "Ireland", "Italy", "Kazakhstan", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Malta", "Moldova", "Monaco", "Montenegro", "Netherlands", "North Macedonia", "Norway", "Philippines", "Poland", "Portugal", "Romania", "Russia", "San Marino", "Serbia", "Slovakia", "Slovenia", "Spain", "Sweden", "Switzerland", "Turkey", "Ukraine", "United Kingdom", "Uruguay", "Kosovo")
+west_africa <- c("Benin", "Burkina Faso", "Cabo Verde", "Cote d'Ivoire", "Gambia", "Ghana", "Guinea", "Equatorial Guinea", "Liberia", "Mali", "Mauritania", "Niger", "Nigeria", "Senegal", "Sierra Leone", "Togo")
 
-`North America` <- c("Antigua and Barbuda", "Bahamas", "Barbados", "Canada", "Costa Rica", "Cuba", "Dominican Republic", "El Salvador", "Guatemala", "Haiti", "Honduras", "Jamaica", "Mexico", "Nicaragua", "Panama", "Saint Lucia", "US", "Dominica", "Grenada", "Belize", "Saint Kitts and Nevis")
+south_africa <- c("Botswana","Eswatini", "Lesotho", "Namibia", "South Africa")
 
-Others <- c("Diamond Princess", "MS Zaandam")
+north_africa <- c("Algeria", "Egypt", "Libya", "Morocco", "Sudan", "Tunisia", "Mauritania") 
+
+east_africa <- c("Burundi", "Comoros", "Djibouti", "Eritrea", "Ethiopia", "Kenya", "Madagascar", "Malawi", "Mauritius", "Mayotte", "Mozambique", "Reunion", "Seychelles", "Somalia", "South Sudan", "Tanzania", "Uganda", "Zambia", "Zimbabwe")
+
+central_africa <-  c("Angola", "Cameroon", "Central African Republic", "Chad", "Congo (Kinshasa)", "Congo (Brazzaville)", "Equatorial Guinea", "Gabon", "Sao Tome and Príncipe")
+
+
+africa <- c(west_africa, north_africa, east_africa, central_africa, south_africa)
+
+# Africa <- c("Algeria", "Angola", "Benin", "Botswana", "Burkina Faso", "Cabo Verde", "Cameroon", "Central African Republic", "Chad", "Congo (Brazzaville)", "Congo (Kinshasa)", "Cote d'Ivoire", "Djibouti", "Egypt", "Equatorial Guinea", "Eritrea", "Eswatini", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "Guinea-Bissau", "Kenya", "Lesotho", "Liberia", "Libya", "Madagascar", "Mali","Malawi", "Mauritania", "Mauritius", "Morocco", "Mozambique", "Namibia", "Niger", "Nigeria", "Rwanda", "Senegal", "Seychelles", "Sierra Leone", "Somalia", "South Africa", "Sudan", "Tanzania", "Togo", "Tunisia", "Uganda", "Zambia", "Zimbabwe")
+
+asia <- c("Afghanistan", "Armenia", "Azerbaijan", "Bahrain", "Bangladesh", "Bhutan", "Brunei", "Cambodia", "China", "India", "Indonesia", "Iran", "Iraq", "Israel", "Japan", "Jordan", "Kazakstan", "Korea, South", "Kuwait", "Kyrgyzstan", "Lebanon", "Malaysia", "Maldives", "Mongolia", "Nepal", "Oman", "Pakistan", "Peru", "Qatar", "Saudi Arabia", "Singapore", "Sri Lanka", "Taiwan*", "Thailand", "United Arab Emirates", "Uzbekistan", "Vietnam", "Syria", "Timor-Leste", "Laos", "West Bank and Gaza", "Burma")
+
+south_america <- c("Argentina", "Brazil", "Chile", "Colombia", "Ecuador", "Guyana", "Paraguay", "Suriname", "Trinidad and Tobago", "Venezuela")
+
+oceania <- c("Australia", "Fiji", "New Zealand", "Papua New Guinea")
+
+europe <- c("Albania", "Andorra", "Austria", "Belarus", "Belgium", "Bolivia", "Bosnia and Herzegovina", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland", "France", "Georgia", "Germany", "Greece", "Greece", "Holy See", "Hungary", "Iceland", "Ireland", "Italy", "Kazakhstan", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Malta", "Moldova", "Monaco", "Montenegro", "Netherlands", "North Macedonia", "Norway", "Philippines", "Poland", "Portugal", "Romania", "Russia", "San Marino", "Serbia", "Slovakia", "Slovenia", "Spain", "Sweden", "Switzerland", "Turkey", "Ukraine", "United Kingdom", "Uruguay", "Kosovo")
+
+north_america <- c("Antigua and Barbuda", "Bahamas", "Barbados", "Canada", "Costa Rica", "Cuba", "Dominican Republic", "El Salvador", "Guatemala", "Haiti", "Honduras", "Jamaica", "Mexico", "Nicaragua", "Panama", "Saint Lucia", "US", "Dominica", "Grenada", "Belize", "Saint Kitts and Nevis", "Saint Vincent and the Grenadines")
+
+others <- c("Diamond Princess", "MS Zaandam")
 
 
 
@@ -42,28 +61,17 @@ names(covid_cases) <- stringr::str_to_lower(names(covid_cases))
 
 covid_cases2 <- covid_cases %>%
   
-  mutate(continent = case_when(`country/region` %in% Africa ~ "Africa",
-                               `country/region` %in% Asia ~ "Asia",
-                               `country/region` %in% Europe ~ "Europe",
-                               `country/region` %in% `North America` ~ "North America",
-                               `country/region` %in% `South America` ~ "South America",
-                               `country/region` %in% Australia ~ "Australia",
-                               `country/region` %in% Others ~ "Others")
-         ) %>%
+  mutate(continent = case_when(`country/region` %in% africa ~ "Africa",
+                               `country/region` %in% asia ~ "Asia",
+                               `country/region` %in% europe ~ "Europe",
+                               `country/region` %in% north_america ~ "North America",
+                               `country/region` %in% south_america ~ "South America",
+                               `country/region` %in% oceania ~ "Oceania",
+                               `country/region` %in% others ~ "Others")
+  ) %>%
   
   rename(country = `country/region`)
 
-
-# data("pop")
-# 
-# 
-# pop_estimate <- pop %>%
-#   select(name, "2020") %>%
-#   dplyr::rename(country = name,
-#                 population = `2020`)
-
-
-# covid_cases2 <- left_join(covid_cases2, pop_estimate) %>%
 
 covid_cases2 <- covid_cases2 %>%
   
@@ -131,6 +139,23 @@ covid_df <- left_join(covid_cases2,
                              "date"))
 
 covid_df$country <- as_factor(covid_df$country)
+
+
+
+################### Africa data  ##############################
+
+covid_africa <- covid_df %>%
+  filter(continent == "Africa") %>%
+  rename(region = `province/state`) %>%
+  mutate(region = case_when(country %in% west_africa ~ "West Africa",
+                            country %in% east_africa ~ "East Africa",
+                            country %in% north_africa ~ "North Africa",
+                            country %in% central_africa ~ "Central Africa",
+                            country %in% south_africa ~ "South Africa",
+                            TRUE ~ "Others")
+         )
+#######################################################################
+
 
 ## number of countries affected at the beginning of March
 
