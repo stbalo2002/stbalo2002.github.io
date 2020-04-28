@@ -171,7 +171,7 @@ n_count <- covid_df %>%
 ## no of cases as at yesterday
 
 n_count2 <- covid_df %>%
-  filter(date == Sys.Date() - 2) %>%
+  filter(date == Sys.Date() - 1) %>%
   group_by(country, date) %>%
   summarise(cases = sum(cases)) %>%
   filter(cases != 0)
