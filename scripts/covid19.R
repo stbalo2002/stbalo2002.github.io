@@ -1,11 +1,19 @@
 ## load required libraries
 
-library(tidyverse)
-library(plotly)
-library(lubridate)
-library(ggExtra)
-library(gganimate)
-library(magick)
+
+pacman::p_load(tidyverse, 
+               plotly,
+               lubridate,
+               ggExtra,
+               gganimate,
+               magick)
+# # 
+# library(tidyverse)
+# library(plotly)
+# library(lubridate)
+# library(ggExtra)
+# library(gganimate)
+# library(magick)
 # library(wpp2019)
 
 
@@ -407,7 +415,7 @@ indicator_plots <-  df_ng2 %>%
 ##### make animated plots for top seven affected states by cases
 
 p <-  df_ng %>%
-  filter(date > Sys.Date() - 30) %>% # select most recent 40 days
+  filter(date > Sys.Date() - 25) %>% # select most recent 40 days
   group_by(date) %>%
   arrange(desc(cases_cum)) %>% # arrange by desc the assigned indicator
   slice(1:7) %>% # take first 7 for each day
@@ -480,7 +488,7 @@ anim <- p +
 
 # anim_save("animated_plot.gif", anim)
 
-animate(anim, 100, fps = 10, 
+animate(anim, 50, fps = 5, 
         renderer = gifski_renderer("gganim.gif"))
 
 
